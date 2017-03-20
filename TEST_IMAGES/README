@@ -1,0 +1,55 @@
+##################
+##     FILES    ##
+##################
+
+This is the main folder for the detection/matching/calibration process.
+You should put here:
+- the images of your dataset
+Note that it could fail if the images are not all of the same size. 
+JPG and PNG works but other formats have not been tested.
+- a K.txt file that contains the intrinsic parameter matrix.
+For now, it is not possible to have different K matrices for each pictures.
+- a images.txt file to store the name of the pictures and the full location
+-lists.txt file is optionnal but it is helpful to use with openMVG for point detection
+
+##################
+##    FOLDERS   ##
+##################
+
+openMVG folder is where you should save your detections with openMVG if you want to use them for the calibration (works better than with openCV)
+
+pictures folder is optionnal. It is where the visual results will be saved.
+
+##################
+##   COMMANDS   ##
+##################
+
+Line detection:
+
+LSD_MULTISCALE -d your_current_folder -i images.txt_location [-m 1/0 for multiscale option ON/OFF (default = ON) -t double_threshold threshold for segment detection (default = 0.05% of image size)
+
+Vanishing point detection:
+(NEED LINE DETECTION)
+
+VANISHING_POINT -d your_current_folder -i images.txt_location 
+
+Line Matching:
+(can be used for line & vanishing point detection)
+
+LINE_MATCHING -d your_current_folder -i images.txt_location [-c 1/0 for consecutive pictures only or all possible matching (default ON) -l 1/0 to compute the matches between first and last picture (default ON) -D 1/0 to compute line detection before (default ON) -m 1/0 for multiscale option ON/OFF (default = ON) -t double_threshold threshold for segment detection (default = 0.02% of image size)]
+
+Bifocal calibration:
+
+CALIBRATION -d your_current_folder -i images.txt_location [-c 1/0 for consecutive pictures only or all possible calibrations (default ON) -l 1/0 to compute the calibration between first and last picture (default ON) -g 0/1/2 ground truth type (default 2) -o 1/0 use openMVG point detection & matching (default ON) -r RANSAC threshold (default is a contrario RANSAC -1)
+
+Ground truth types:
+-O nothing
+-1 relative calibrations only (see 0000_0001_R.txt file for example)
+it has to be 2 files per pair of cameras (one for rotation, one for translation direction) and with a name of the type image1_image2_R/t.txt
+-2 global calibrations (see 0000.png.camera file for example)
+it has to contain the K matrix first, then 0 0 0 then the rotation matrix and then the camera position:
+K
+0 0 0
+R
+t (in row)
+it has to be in a file of the type image.png.camera (note that the .png.camera can be disabled in main_calibration.cpp)
