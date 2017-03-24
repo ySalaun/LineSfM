@@ -1,0 +1,9 @@
+Project: acvp
+URL: None
+License: MPL2
+
+ * @brief a contrario detection of vanishing points
+ * @author Pascal Monasse
+
+Please cite the following:
+Vanishing point detection without any a priori information, Almansa, A. and Desolneux, A. and Vamech, S. TPAMI 2003
