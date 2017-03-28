@@ -8,15 +8,23 @@ Introduction
 
 This code is mainly linked with the following publication, which was subject to peer review: 
 
-"Robust and Accurate Line- and/or Point-Based Pose Estimation without Manhattan Assumptions", Yohann Salaun, Renaud Marlet, and Pascal Monasse, ECCV 2016
+[Robust and Accurate Line- and/or Point-Based Pose Estimation without Manhattan Assumptions](https://drive.google.com/file/d/0B96kyL2SBsmzWDc4ekd2VElKY0U/view), Yohann Salaun, Renaud Marlet, and Pascal Monasse, ECCV 2016
 
 It computes the calibration between two cameras using both lines and points. It gives performant results in textured scenes and in indoor scenes.
+
+and with 
+
+[Robust SfM with Little Image Overlap](https://arxiv.org/pdf/1703.07957.pdf), Yohann Salaun, Renaud Marlet, and Pascal Monasse, arXiv.org 2017
 
 ------------
 Notes
 ------------
 
-This code has been tested on linux 64 bits. It might not work well on other os. If you have tested it on Windows, I would be glad to know if it works.
+This code has been tested on linux 64 bits. It might not work well on other os. If you have tested it on Windows, we would be glad to know if it works.
+
+For now, no point detector is included. We advise you to use openMVG detections (you need to change the output of the .bin matching file to .txt file if you use the lastest version).
+
+Distorsion strongly decreases results quality. we advise you to get rid of it before computing calibration.
 
 ------------
 Building
