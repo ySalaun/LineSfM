@@ -488,8 +488,12 @@ PictureVPs computeVanishingPoints(const Mat &im, vector<Segment> &lines){
           index = k;
         }
       }
-      lines[index].vpIdx = vanishingPoints.size();
-      vp.cluster.push_back(index);
+      vector<int>::iterator it = find(vp.cluster.begin(), vp.cluster.end(), index);
+      if (it == v.end())
+      {
+        lines[index].vpIdx = vanishingPoints.size();
+        vp.cluster.push_back(index);
+      }
     }
     vp.refineCoords(lines);
     vanishingPoints.push_back(vp);
