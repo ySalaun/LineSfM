@@ -646,7 +646,7 @@ ParallelConstraints computeParallelPairs(const PictureSegments &l1, const Pictur
       //if(l2[mi].vpIdx != l2[mj].vpIdx){ continue;}
       
       ParallelPair pp1(li, lj, vp_li, l1);
-      ParallelPair pp2(mi, mj, vp_li, l2);
+      ParallelPair pp2(mi, mj, vp_mi, l2);
       
       // add the pair to the list
       if(pp1.correct && pp2.correct){
