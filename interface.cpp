@@ -624,7 +624,7 @@ ParallelConstraints computeParallelPairs(const PictureSegments &l1, const Pictur
     int vp_mi = l2[mi].vpIdx;
     
     // test the vps
-    if(vp_li == -1 && vp_mi == -1){continue;}
+    if(vp_li == -1 || vp_mi == -1){continue;}
     
     for(int lj = 0; lj < li; lj++){
       int mj = matches_lines[lj];
@@ -636,7 +636,7 @@ ParallelConstraints computeParallelPairs(const PictureSegments &l1, const Pictur
       int vp_mj = l2[mj].vpIdx;
       
       // test the vps
-      if(vp_li != vp_lj && vp_mi != vp_mj){continue;}
+      if(vp_li != vp_lj || vp_mi != vp_mj){continue;}
       
       // check the matches _vps
       //if(l2[mi].vpIdx != l2[mj].vpIdx){ continue;}
