@@ -237,12 +237,13 @@ bool randomPPair(const ParallelConstraints &ppairs, int &i1, int &i2){
   // first pair is easy to find
   i1 = rand()%(ppairs.size());
   int vp1 = ppairs[i1].first.vp_idx;
+  int vp2 = ppairs[i1].second.vp_idx;
   
   // second need to select the pairs belonging to other vps
   // TODO improve this selection it might take too much time...
   vector<int> indexes;
   for(int i = 0; i < ppairs.size(); i++){
-    if(ppairs[i].first.vp_idx != vp1){
+    if(ppairs[i].first.vp_idx != vp1 && ppairs[i].second.vp_idx != vp2){
       indexes.push_back(i);
     }
   }
@@ -252,7 +253,8 @@ bool randomPPair(const ParallelConstraints &ppairs, int &i1, int &i2){
     return false;
   }
   
-  i2 = rand()%indexes.size();
+  int id2 = rand()%indexes.size();
+  i2 = indexes[id2];
   return true;
 }
 

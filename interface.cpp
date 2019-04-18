@@ -488,8 +488,12 @@ PictureVPs computeVanishingPoints(const Mat &im, vector<Segment> &lines){
           index = k;
         }
       }
-      lines[index].vpIdx = vanishingPoints.size();
-      vp.cluster.push_back(index);
+      vector<int>::iterator it = find(vp.cluster.begin(), vp.cluster.end(), index);
+      if (it == v.end())
+      {
+        lines[index].vpIdx = vanishingPoints.size();
+        vp.cluster.push_back(index);
+      }
     }
     vp.refineCoords(lines);
     vanishingPoints.push_back(vp);
@@ -624,7 +628,7 @@ ParallelConstraints computeParallelPairs(const PictureSegments &l1, const Pictur
     int vp_mi = l2[mi].vpIdx;
     
     // test the vps
-    if(vp_li == -1 && vp_mi == -1){continue;}
+    if(vp_li == -1 || vp_mi == -1){continue;}
     
     for(int lj = 0; lj < li; lj++){
       int mj = matches_lines[lj];
@@ -636,13 +640,13 @@ ParallelConstraints computeParallelPairs(const PictureSegments &l1, const Pictur
       int vp_mj = l2[mj].vpIdx;
       
       // test the vps
-      if(vp_li != vp_lj && vp_mi != vp_mj){continue;}
+      if(vp_li != vp_lj || vp_mi != vp_mj){continue;}
       
       // check the matches _vps
       //if(l2[mi].vpIdx != l2[mj].vpIdx){ continue;}
       
       ParallelPair pp1(li, lj, vp_li, l1);
-      ParallelPair pp2(mi, mj, vp_li, l2);
+      ParallelPair pp2(mi, mj, vp_mi, l2);
       
       // add the pair to the list
       if(pp1.correct && pp2.correct){
