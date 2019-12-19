@@ -116,10 +116,10 @@ int main(int argc, char* argv[]){
     }
     else{
       cout << " - read segments" << endl;
-      segments[i] = readLines(dirPath, picName[i] + ext);
+      segments[i] = readLines(dirPath, picName[i]);
       
       cout << " - read descriptors" << endl;
-      readDescriptors(segments[i], dirPath, picName[i] + ext);
+      readDescriptors(segments[i], dirPath, picName[i]);
     }
   }
   
@@ -151,7 +151,7 @@ int main(int argc, char* argv[]){
       }
       else{
 	cout << " - read line matches" << endl;
-	vector<int> mLines = readMatches(dirPath, picName[i], picName[j] + ext, LINE);
+	vector<int> mLines = readMatches(dirPath, picName[i], picName[j], LINE);
 	matches_lines.insert(PictureMatches(imPair, mLines));
       }
     }
